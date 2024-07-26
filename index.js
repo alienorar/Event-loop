@@ -166,14 +166,14 @@ function reverseUpperCase(s) {
 // Task 75
 // Berilgan stringdagi barcha raqamlarni toping va alohida arrayda qaytaring.
 
-// function extractNumbers(str) {
-//     let arr = +str.split("")
-//     console.log(arr);
-//     let new_arr = arr.filter((item => typeof item !== "number"))
-//     console.log(new_arr);
-// }
+function extractNumbers(str) {
+    let arr = str
+    console.log(arr);
+   let result = arr.filter(item => typeof item == "number")
+   console.log(result);
+}
 
-// // Test case
+// Test case
 // console.log(extractNumbers("There are 3 apples and 4 oranges")); // Output: [3, 4]
 // console.log(extractNumbers("123 Main St.")); // Output: [123]
 
@@ -212,13 +212,87 @@ function valueTypes(obj) {
 // Output: ["number", "string", "boolean", "number", "object", "undefined", "object"]
 
 
+// Task 77
+// Berilgan objectdagi barcha kalitlarni ularning qiymatlari bilan almashtiring.
+// Agar qiymatlari takrorlansa, oxirgi qiymatni qabul qiling.
+
+function invertObject(obj) {
+    let arr = [{ value: obj, step: 1 }]
+    let result = {}
+    for (let i = 0; i < arr.length; i++) {
+        const { value, step } = arr[i]
+        for (const key in value) {
+            if (typeof value[key] === "object") {
+                arr.push({ value: value[key], step: step + 1 })
+            }
+            else {
+                result[value[key]] = key
+            }
+        }
+    }
+    return result
+}
+const obj = {
+    a: 1,
+    b: {
+        c: 2,
+        d: {
+            e: 3,
+            f: {
+                g: 4
+            }
+        }
+    }
+};
+// console.log(invertObject(obj)); // Output: { 1: 'a', 2: 'c', 3: 'e', 4: 'g' }
+
+// Task 79
+// Berilgan objectdagi barcha raqamli qiymatlarning yig'indisini hisoblang.
 
 
+function sumNumbers(obj2) {
+    let arr = [{ value: obj2, step: 1 }]
+    let result = []
+    for (let i = 0; i < arr.length; i++) {
+        const { value, step } = arr[i]
+        for (const key in value) {
+            if (typeof value[key] === "object") {
+                arr.push({ value: value[key], step: step + 1 })
+            }
+            else if (typeof value[key] === "number") {
+                result.push(value[key])
+            }
+        }
+    }
+    return result.reduce((a, b) => (a + b))
+
+}
+
+const obj2 = {
+    a: 1,
+    b: {
+        c: 2,
+        d: {
+            e: 3,
+            f: {
+                g: 4
+            }
+        }
+    }
+};
+// console.log(sumNumbers(obj2)); // Output: 10
 
 
-
-
-
-
+// Task 80
+// Berilgan stringni so'zlarga ajratib, har bir so'zning bosh harfini katta qiling va qayta birlashtiring
+function capitalizeWords(s) {
+    let arr = s.split(" ")
+    let new_arr = arr.map(item => {
+        return item[0].toUpperCase() + item.slice(1)
+    });
+    return new_arr
+}
+// console.log(capitalizeWords("hello world from javascript")); // Output: "Hello World From Javascript"
+// console.log(capitalizeWords("this is a test")); // Output: "This Is A Test"
 
 
